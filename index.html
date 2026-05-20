@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Be My Baby - Para Miamol ❤️</title>
+    <style>
+        :root {
+            --fondo-base: #0a0a0a;
+            --fondo-verso: #121214;
+            --fondo-coro: #660f22; /* Rojo quemado/vino para el coro */
+            --acento: #ff4d6d;
+            --marco: #ffffff;
+        }
+
+        body, html {
+            margin: 0; padding: 0;
+            width: 100%; height: 100%;
+            background-color: var(--fondo-base);
+            font-family: "Courier New", Courier, monospace;
+            color: white;
+            overflow: hidden;
+            /* Transición suave para el cambio de color de fondo */
+            transition: background-color 0.8s ease; 
+        }
+
+        /* --- EFECTOS DE FONDO --- */
+        body.verso {
+            background-color: var(--fondo-verso);
+        }
+
+        body.explosion {
+            background-color: var(--fondo-coro);
+            animation: pulsoCoro 2s infinite alternate;
+        }
+
+        @keyframes pulsoCoro {
+            0% { background-color: #500b1a; }
+            100% { background-color: #80162e; }
+        }
+
+        #bienvenida {
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(circle, #222 0%, #000 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 20px;
+            text-align: center;
+        }
+
+        #btn-iniciar {
+            padding: 15px 40px;
+            font-size: 1.3rem;
+            border: 2px solid var(--acento);
+            background: transparent;
+            color: var(--acento);
+            cursor: pointer;
+            font-weight: bold;
+            letter-spacing: 2px;
+            transition: 0.4s;
+        }
+
+        #btn-iniciar:hover { background: var(--acento); color: white; box-shadow: 0 0 20px var(--acento); }
+
+        .escena {
+            display: none;
+            width: 100%;
+            height: 100vh;
+        }
+
+        #carrete-creditos {
+            position: absolute;
+            width: 100%;
+            top: 40%; 
+            left: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: transform 0.9s cubic-bezier(0.2, 1, 0.2, 1);
+        }
+
+        /* --- ARREGLO GENERAL DE FOTOS (No se enciman) --- */
+        .foto-recuerdo {
+            width: 220px;
+            background: var(--marco);
+            padding: 8px 8px 25px 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            margin-top: 45px; 
+            margin-bottom: 45px;
+            z-index: 5;
+            flex-shrink: 0;
+            transition: transform 0.5s ease;
+        }
+
+        .foto-recuerdo img { 
+            width: 100%; 
+            height: auto; 
+            display: block; 
+        }
+
+        /* Posiciones locas de las fotos */
+        .f-izq { align-self: flex-start; margin-left: 5%; transform: rotate(-7deg); }
+        .f-der { align-self: flex-end; margin-right: 5%; transform: rotate(6deg); }
+        .f-centro { align-self: center; transform: rotate(-1deg); width: 250px; }
+        .encima { margin-top: -20px; margin-bottom: 40px; z-index: 10; }
+
+        .linea {
+            text-align: center;
+            width: 90%;
+            margin: 65px 0; 
+            min-height: 80px;
+            opacity: 0.12;
+            transition: all 0.7s ease;
+            z-index: 15;
+        }
+
+        .linea.activa {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+
+        .linea b {
+            font-size: 1.5rem;
+            display: block;
+            color: var(--acento);
+            text-shadow: 0 0 10px rgba(255, 77, 109, 0.4);
+            line-height: 1.3;
+        }
+
+        .linea small {
+            font-size: 1rem;
+            color: #ddd;
+            display: block;
+            margin-top: 10px;
+        }
+
+        /* Ajustes PC */
+        @media (min-width: 768px) {
+            .foto-recuerdo { width: 300px; }
+            .f-centro { width: 380px; }
+            .linea b { font-size: 2.6rem; }
+            .linea small { font-size: 1.3rem; }
+            .f-izq { margin-left: 18%; }
+            .f-der { margin-right: 18%; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="bienvenida">
+        <h2 style="margin-bottom: 30px; font-size: 1.2rem; padding: 0 10px; line-height: 1.6;">
+            ¿Escucho esto cuando pienso en ti? o ¿Pienso en ti cuando escucho esto?. <br>Tal vez, siempre estoy pensando en ti. <br> Uno de muchos proyectos que vienen miamol, ve guardandolos en tu corazón y te sorprenderan cuando menos te lo esperes. (Se vienen cositas). <br> ¡Súbe el volumen y el brillo miamol! ❤️
+        </h2>
+        <button id="btn-iniciar" onclick="comenzar()">REPRODUCIR 🎵</button>
+    </div>
+
+    <div class="escena" id="main">
+        <div id="carrete-creditos">
+            <div class="linea" id="l-0"><b>❤️Be My Baby❤️</b><small>Cover By Bunkers</small></div>
+            <div class="foto-recuerdo f-centro encima"><img src="img27.jpg"></div>
+            
+            <div class="linea" id="l-1"><b>The night we met I knew I</b><small>La noche que nos conocimos supe que</small></div>
+            <div class="foto-recuerdo f-izq encima"><img src="img0.jpg"></div>
+            
+            <div class="linea" id="l-2"><b>Needed you so</b><small>Te necesitaba tanto</small></div>
+            <div class="foto-recuerdo f-der encima"><img src="img1.jpg"></div>
+            
+            <div class="linea" id="l-3"><b>And if I had the chance I´d</b><small>Y si tuviera la oportunidad...</small></div>
+            <div class="foto-recuerdo f-centro encima"><img src="img2.jpg"></div>
+            
+            <div class="linea" id="l-4"><b>Never let you go</b><small>Nunca te dejaría ir</small></div>
+            <div class="foto-recuerdo f-izq encima"><img src="img3.jpg"></div>
+            
+            <div class="linea" id="l-5"><b>So won't you say you love me</b><small>Entonces ¿No dirás que me amas?</small></div>
+            <div class="foto-recuerdo f-der encima"><img src="img4.jpg"></div>
+
+            <div class="linea" id="l-6"><b>I'll make you so proud of me</b><small>Haré que estés tan orgullosa de mí</small></div>
+            <div class="foto-recuerdo f-centro encima"><img src="img5.jpg"></div>
+            
+            <div class="linea" id="l-7"><b>We'll make'em turn their heads</b><small>Haremos que giren sus cabezas</small></div>
+            <div class="foto-recuerdo f-izq encima"><img src="img6.jpg"></div>
+            
+            <div class="linea" id="l-8"><b>Every Place We Go</b><small>En Cada Lugar Al Que Vayamos</small></div>
+            <div class="foto-recuerdo f-der encima"><img src="img7.jpg"></div>
+            
+            <div class="linea" id="l-9"><b>So Won't You Please</b><small>Así Que Serás Por Favor</small></div>
+            <div class="foto-recuerdo f-centro encima"><img src="img8.jpg"></div>
+            
+            <div class="linea" id="l-10"><b>(Be My, Be My Baby!) <br> ❤️Be My Little Baby❤️</b><small>(Sé Mi, Sé Mi Chica!) <br> ❤️Sé mi amorcito :3❤️</small></div>
+            <div class="foto-recuerdo f-izq encima"><img src="img9.jpg"></div>
+            
+            <div class="linea" id="l-11"><b>(My One And Only Baby) <br> ❤️Say You'll Be My Darling❤️</b><small>(Mi único y exclusivo amor) <br> ❤️Di Que Serás Mi Amorcito❤️</small></div>
+            <div class="foto-recuerdo f-der encima"><img src="img10.jpg"></div>
+
+            <div class="linea" id="l-12"><b>(Be My, Be My Baby) <br> ❤️Be My Baby Now❤️</b><small>(Sé Mi, Sé Mi Amor) <br> ❤️Sé Mi Amor Ahora❤️</small></div>
+            <div class="foto-recuerdo f-centro encima"><img src="img11.jpg"></div>
+            
+            <div class="linea" id="l-13"><b>Uhhh-Ohhh-Ohh-Oh</b><small>Uhhh-Ohhh-Ohh-Oh</small></div>
+            <div class="foto-recuerdo f-izq encima"><img src="img12.jpg"></div>
+            
+            <div class="linea" id="l-14"><b>I'll make you happy baby</b><small>Te haré feliz miamor</small></div>
+            <div class="foto-recuerdo f-der encima"><img src="img13.jpg"></div>
+            
+            <div class="linea" id="l-15"><b>Just wait and see</b><small>Solo espera y verás</small></div>
+            <div class="foto-recuerdo f-centro encima"><img src="img14.jpg"></div>
+            
+            <div class="linea" id="l-16"><b>For every kiss you give me</b><small>Por cada beso que me des</small></div>
+            <div class="foto-recuerdo f-izq encima"><img src="img15.jpg"></div>
+
+            <div class="linea" id="l-17"><b>❤️I'll Give You Three ❤️</b><small>❤️ Yo Te Daré Tres :3 ❤️</small></div>
+            <div class="foto-recuerdo f-der encima"><img src="img16.jpg"></div>
+            
+            <div class="linea" id="l-18"><b>Oh, since the day I saw you</b><small>Oh, desde el día en que te ví</small></div>
+            <div class="foto-recuerdo f-centro encima"><img src="img17.jpg"></div>
+            
+            <div class="linea" id="l-19"><b>I have been waiting for you</b><small>Te he estado esperando</small></div>
+            <div class="foto-recuerdo f-izq encima"><img src="img18.jpg"></div>
+            
+            <div class="linea" id="l-20"><b>You know I will adore you'til eternity</b><small>Sabes que te adoraré hasta la eternidad</small></div>
+            <div class="foto-recuerdo f-der encima"><img src="img19.jpg"></div>
+            
+            <div class="linea" id="l-21"><b>So Won't You Please</b><small>Así Que Sé Por Favor</small></div>
+            <div class="foto-recuerdo f-centro encima"><img src="img20.jpg"></div>
+            
+            <div class="linea" id="l-22"><b>(Be My, Be My Baby!) <br> ❤️Be My Little Baby❤️</b><small>(Sé Mi, Sé Mi Amor!) <br> ❤️Sé Mi Amorcito❤️</small></div>
+            <div class="foto-recuerdo f-izq encima"><img src="img21.jpg"></div>
+
+            <div class="linea" id="l-23"><b>(My One And Only Baby) <br> ❤️Say You'll Be My Darling❤️</b><small>(Mi Único Y Exclusivo Amor) <br> ❤️Di Que Serás Mi Amorcito❤️</small></div>
+            <div class="foto-recuerdo f-der encima"><img src="img22.jpg"></div>
+            
+            <div class="linea" id="l-24"><b>(Be My, Be My Baby) <br> ❤️Be My Baby Now!❤️ <br></b><small>(Sé Mi, Sé Mi Amor) <br> ❤️Se Mi Amor Ahora!❤️</small></div>
+            <div class="foto-recuerdo f-centro encima"><img src="img23.jpg"></div>
+   
+            <div class="linea" id="l-25"><b>Uhhhh-Ohhh-Ohh-Oh</b><small>Uhhhh-Ohhh-Ohh-Oh</small></div>
+            <div class="foto-recuerdo f-izq encima"><img src="img24.jpg"></div>
+            <div class="linea" id="l-26"><b>🎶Instrumental🎶</b><small>Aprovecho este espacio para decirte que te quiero mucho miamol :3</small></div>
+            
+            <div class="foto-recuerdo f-centro encima"><img src="img25.jpg" style="border: 2px solid var(--acento);"></div>
+            <div class="linea" id="l-27"><b>❤️ ❤️ So Come On And Please ❤️ ❤️</b><small>❤️ ❤️ Entonces Vamos Por Favor ❤️ ❤️</small></div>
+            
+            <div class="linea" id="l-28"><b>(Be My, Be My Baby!) <br> ❤️Be My Little Baby❤️</b><small>(Sé Mi, Sé Mi Amor!) <br> ❤️Sé Mi Amorcito❤️</small></div>
+            <div class="linea" id="l-29"><b>(My One And Only Baby) <br> ❤️Say You'll Be My Darling❤️</b><small>(Mi Único Y Exclusivo Amor) <br> ❤️Di Que Serás Mi Amorcito❤️</small></div>
+            <div class="linea" id="l-30"><b>(Be My, Be My Baby) Be My Baby Now! <br> Uhh-Ohhh-Ohhh-Ohh-Ohhh</b><small>(Sé Mi, Sé Mi Amor) Se Mi Amor Ahora! <br> (My One And Only Baby)Uhh-Ohhh-Ohhh-Ohh-Ohhh</small></div>
+            <div class="linea" id="l-31"><b>🎶Mini Instrumental🎶</b><small></small></div>
+            <div class="linea" id="l-32"><b>Oh!</b><small>Oh!</small></div>
+            <div class="linea" id="l-33"><b>(Be My, Be My Baby!) <br> ❤️Be My Little Baby❤️</b><small>(Sé Mi, Sé Mi Amor!) <br> ❤️Sé Mi Amorcito❤️</small></div>
+            <div class="linea" id="l-34"><b>(My One And Only Baby) <br> ❤️ Ohhhh-Ohhh-Ohh Baby!❤️</b><small>(Mi Único Y Exclusivo Amor) <br> ❤️ Ohhhh-Ohhh-Ohh Corazón! ❤️</small></div>
+            <div class="linea" id="l-35"><b>(Be My, Be My Baby) Be My Baby Now! <br> (My One And Only Baby) Uhh-Ohhh-Ohhh-Ohh-Ohhh</b><small>(Sé Mi, Sé Mi Amor) Se Mi Amor Ahora! <br>(Mi Unico Y Exclusivo Amor) Uhh-Ohhh-Ohhh-Ohh-Ohhh</small></div>
+            <div class="linea" id="l-36"><b>(Be My, Be My Baby!) <br> Ohhh-Ohh-Ohhh-Ohhhh</b><small>(Sé Mi, Sé Mi Amor!) <br> Ohhh-Ohh-Ohhh-Ohhhh </small></div>
+            <div class="linea" id="l-37"><b>(My One And Only Baby) <br> Ohhh-Ohhh-Ohhhohhhh</b><small>(Mi Único Y Exclusivo Amor) <br> Ohhh-Ohhh-Ohhhohhhh </small></div>
+            
+            <div class="linea" id="l-38"><b>(Be My, Be My Baby) Be My Baby Now! <br> (My One And Only Baby) Uhh-Ohhh-Ohhh-Ohh-Ohhh</b><small>(Sé Mi, Sé Mi Amor) Se Mi Amor Ahora! <br> (Mi Unico Y Exclusivo Amor) Uhh-Ohhh-Ohhh-Ohh-Ohhh</small></div>
+            <div class="foto-recuerdo f-centro encima"><img src="img26.jpg"></div>
+
+            <div style="height: 350px;"></div> 
+        </div>
+    </div>
+
+    <audio id="track" src="musica.mp3"></audio>
+
+    <script>
+        // --- MAPEO EXACTO: 39 MARCAS DE TIEMPO CORRESPONDIENTES A l-0 HASTA l-38 ---
+        const DATA = [
+            { s: 0.00,   f: 'v' },  // l-0: Título inicial (arranca de inmediato)
+            { s: 8.10,   f: 'v' },  // l-1: The night we met...
+            { s: 12.13,  f: 'v' },  // l-2: Needed you so...
+            { s: 16.06,  f: 'v' },  // l-3: And if I had...
+            { s: 19.00,  f: 'v' },  // l-4: Never let you go
+            { s: 24.00,  f: 'v' },  // l-5: So won't you say...
+            { s: 28.05,  f: 'v' },  // l-6: I'll make you so...
+            { s: 32.04,  f: 'v' },  // l-7: We'll make'em...
+            { s: 35.10,  f: 'v' },  // l-8: Every Place We Go...
+            { s: 37.18,  f: 'v' },  // l-9: So Won't You Please
+            
+            // --- PRIMER CORO ---
+            { s: 39.50,  f: 'e' },  // l-10: Be My Little Baby
+            { s: 43.00,  f: 'e' },  // l-11: Say You'll Be My Darling
+            { s: 47.20,  f: 'e' },  // l-12: Be My Baby Now
+            { s: 53.02,  f: 'e' },  // l-13: Ohhhh-Ohhh-Ohh-Oh
+            
+            // --- VERSO 2 ---
+            { s: 55.21,  f: 'v' },  // l-14: I'll make you happy baby
+            { s: 59.19,  f: 'v' },  // l-15: Just wait and see
+            { s: 63.20,  f: 'v' },  // l-16: For every kiss...
+            { s: 67.17,  f: 'v' },  // l-17: I'll Give You Three
+            { s: 71.10,  f: 'v' },  // l-18: Oh, since the day...
+            { s: 75.09,  f: 'v' },  // l-19: I have been waiting...
+            { s: 79.09,  f: 'v' },  // l-20: You know I will adore...
+            { s: 85.08,  f: 'v' },  // l-21: So Won't You Please
+            
+            // --- SEGUNDO CORO ---
+            { s: 87.14,  f: 'e' },  // l-22: Be My Little Baby
+            { s: 91.06,  f: 'e' },  // l-23: Say You'll Be My Darling
+            { s: 95.04,  f: 'e' },  // l-24: Be My Baby Now!
+            { s: 100.07,  f: 'e' }, // l-25: Ohhhh-Ohhh-Ohh-Oh
+            { s: 102.30,  f: 'v' }, // l-26: Instrumental largo
+            
+            // --- CLÍMAX FINAL ---
+            { s: 116.59, f: 'e' }, // l-27: So Come On And Please
+            { s: 119.00, f: 'e' }, // l-28: Be My Little Baby
+            { s: 122.19, f: 'e' }, // l-29: Say You'll Be My Darling
+            { s: 127.00, f: 'e' }, // l-30: Be My Baby Now!
+            { s: 134.00, f: 'v' }, // l-31: Mini instrumental
+            { s: 137.07, f: 'v' }, // l-32: Oh!
+            { s: 138.17, f: 'e' }, // l-33: Be My, Be My Baby!
+            { s: 142.06, f: 'e' }, // l-34: My One And Only Baby
+            { s: 146.04, f: 'e' }, // l-35: Be My, Be My Baby
+            { s: 154.04, f: 'e' }, // l-36: Be My, Be My Baby!
+            { s: 157.00, f: 'e' }, // l-37: My One And Only Baby
+            { s: 161.19, f: 'e' }  // l-38: Remate final
+        ];
+
+        function comenzar() {
+            document.getElementById('bienvenida').style.display = 'none';
+            document.getElementById('main').style.display = 'block';
+            
+            const audio = document.getElementById('track');
+            const carrete = document.getElementById('carrete-creditos');
+            const cuerpo = document.body;
+            audio.play();
+
+            audio.ontimeupdate = () => {
+                const ahora = audio.currentTime;
+                
+                DATA.forEach((item, index) => {
+                    if (ahora >= item.s) {
+                        const el = document.getElementById(`l-${index}`);
+                        if (el && !el.classList.contains('activa')) {
+                            document.querySelectorAll('.linea').forEach(l => l.classList.remove('activa'));
+                            el.classList.add('activa');
+                            
+                            if (item.f === 'e') {
+                                cuerpo.className = 'explosion';
+                            } else {
+                                cuerpo.className = 'verso';
+                            }
+                            
+                            const offset = el.offsetTop;
+                            carrete.style.transform = `translateY(-${offset}px)`;
+                        }
+                    }
+                });
+            };
+        }
+    </script>
+</body>
+</html>
